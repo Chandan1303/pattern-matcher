@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 174 60% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 20% 20%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 260 60% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 174 60% 40%;
+
+    --radius: 0.75rem;
+
+    --state-default: 220 15% 92%;
+    --state-active: 174 60% 40%;
+    --state-accepting: 142 70% 40%;
+    --state-transition: 260 60% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Inter', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 174 60% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 260 60% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 174 60% 45%;
+
+    --state-default: 220 15% 20%;
+    --state-active: 174 60% 45%;
+    --state-accepting: 142 70% 45%;
+    --state-transition: 260 60% 60%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+    line-height: 1.2;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-feature-settings: "liga" 0;
+  }
+
+  /* Ensure proper text alignment */
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  /* Fix any potential layout issues */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Ensure proper flex alignment */
+  .flex {
+    display: flex;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+}
+
+@layer components {
+  .dfa-state {
+    @apply w-14 h-14 rounded-full flex items-center justify-center font-mono font-semibold text-lg border-2 transition-all duration-300;
+  }
+
+  .dfa-state-default {
+    @apply bg-secondary border-border text-foreground;
+  }
+
+  .dfa-state-active {
+    @apply bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/30 scale-110;
+  }
+
+  .dfa-state-accepting {
+    @apply border-4 border-success;
+  }
+
+  .dfa-state-match {
+    @apply bg-success border-success text-success-foreground shadow-lg shadow-success/30;
+  }
+
+  .char-box {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center font-mono text-lg border transition-all duration-200;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+
+  .char-default {
+    @apply bg-card border-border text-foreground;
+  }
+
+  .char-current {
+    @apply bg-primary border-primary text-primary-foreground shadow-md;
+  }
+
+  .char-matched {
+    @apply bg-success/20 border-success text-success;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(174 60% 40% / 0.1), hsl(260 60% 55% / 0.1));
+  }
+
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-xl;
+  }
+
+  /* Improved text and layout styles */
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+  }
+
+  /* Better spacing for cards */
+  .card-content {
+    @apply p-6;
+  }
+
+  /* Improved button alignment */
+  .btn {
+    @apply inline-flex items-center justify-center;
+    min-height: 2.5rem;
+  }
+
+  /* Better form field alignment */
+  .form-field {
+    @apply space-y-2;
+  }
+
+  .form-label {
+    @apply text-sm font-medium leading-none;
+  }
+
+  /* Improved table styles */
+  .table-cell {
+    @apply px-3 py-2 text-center align-middle;
+  }
+
+  /* Better responsive text */
+  .responsive-text {
+    @apply text-sm sm:text-base;
+  }
+
+  /* Ensure proper text rendering */
+  .text-smooth {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fix any potential flex alignment issues */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-start {
+    @apply flex items-center justify-start;
+  }
+
+  /* Better spacing utilities */
+  .space-y-consistent > * + * {
+    margin-top: 1rem;
+  }
+
+  .space-x-consistent > * + * {
+    margin-left: 1rem;
+  }
+
+  /* Improved grid layouts */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  /* Better text alignment for different screen sizes */
+  @media (max-width: 640px) {
+    .text-center-mobile {
+      text-align: center;
+    }
+    
+    .text-left-mobile {
+      text-align: left;
+    }
+  }
+}
